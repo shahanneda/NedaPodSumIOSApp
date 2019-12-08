@@ -31,8 +31,8 @@ class FirstViewController: UIViewController ,UITextFieldDelegate,UIPickerViewDel
     func calcAndUpdate(){
         let nps = picker.selectedRow(inComponent: 0) == 0 ?  NPS2(number: currentNum) : NPS3(number: currentNum);
         
-        TwoLabel.text = nps.numberOfTwo;
-        ThreeLabel.text = nps.numberOfThree;
+        TwoLabel.text = String(nps.numberOfTwo);
+        ThreeLabel.text = String(nps.numberOfThree);
         
     }
     func NPS2(number num : Int) -> (numberOfTwo : Int, numberOfThree : Int){
