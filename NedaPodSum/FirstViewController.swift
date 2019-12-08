@@ -12,8 +12,9 @@ class FirstViewController: UIViewController ,UITextFieldDelegate,UIPickerViewDel
     
     @IBOutlet weak var picker: UIPickerView!
     @IBOutlet weak var textField: UITextField!
-    @IBOutlet weak var label: UILabel!
-    
+
+    @IBOutlet weak var TwoLabel: UILabel!
+    @IBOutlet weak var ThreeLabel: UILabel!
     var currentNum = 0;
     var options = ["NPS2" , "NPS3"];
     
@@ -30,7 +31,8 @@ class FirstViewController: UIViewController ,UITextFieldDelegate,UIPickerViewDel
     func calcAndUpdate(){
         let nps = picker.selectedRow(inComponent: 0) == 0 ?  NPS2(number: currentNum) : NPS3(number: currentNum);
         
-        label.text = "2 X "  + String(nps.numberOfTwo) + " + 3 X " + String(nps.numberOfThree);
+        TwoLabel.text = nps.numberOfTwo;
+        ThreeLabel.text = nps.numberOfThree;
         
     }
     func NPS2(number num : Int) -> (numberOfTwo : Int, numberOfThree : Int){
@@ -68,6 +70,9 @@ class FirstViewController: UIViewController ,UITextFieldDelegate,UIPickerViewDel
          let characterSet = CharacterSet(charactersIn: string)
          return allowedCharacters.isSuperset(of: characterSet)
         
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        calcAndUpdate();
     }
 
 }
