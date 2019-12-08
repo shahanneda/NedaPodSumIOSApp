@@ -15,7 +15,7 @@ class FirstViewController: UIViewController ,UITextFieldDelegate,UIPickerViewDel
     @IBOutlet weak var label: UILabel!
     
     var currentNum = 0;
-    var options = ["NPS1" , "NPS2"];
+    var options = ["NPS2" , "NPS3"];
     
 
     
@@ -28,12 +28,23 @@ class FirstViewController: UIViewController ,UITextFieldDelegate,UIPickerViewDel
         textField.keyboardType = .numberPad
     }
     func calcAndUpdate(){
-        let nps = NPS2(number: currentNum);
-        label.text = "2 * "  + String(nps.numberOfTwo) + " 3 * " + String(nps.numberOfThree);
+        let nps = picker.selectedRow(inComponent: 0) == 0 ?  NPS2(number: currentNum) : NPS3(number: currentNum);
+        
+        label.text = "2 X "  + String(nps.numberOfTwo) + " + 3 X " + String(nps.numberOfThree);
         
     }
     func NPS2(number num : Int) -> (numberOfTwo : Int, numberOfThree : Int){
-        return(6,8);
+        if(num % 2 == 0){
+            return (num/2,0);
+        }
+        return((num/2) - 1, 1);
+    }
+    func NPS3(number num : Int) -> (numberOfTwo : Int, numberOfThree : Int){
+        if(num % 3 == 0){
+            return (0,num/3);
+        }
+        let numOf3 = (num / 3) - 2 + num % 3;
+        return(3-num%3, numOf3);
     }
     @IBAction func onChangeNum(_ sender: UITextField) {
         currentNum = Int((sender.text ?? "0")) ?? 0;
