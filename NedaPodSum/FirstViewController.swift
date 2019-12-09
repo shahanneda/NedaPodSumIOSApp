@@ -27,6 +27,19 @@ class FirstViewController: UIViewController ,UITextFieldDelegate,UIPickerViewDel
         picker.delegate = self;
         textField.delegate = self
         textField.keyboardType = .numberPad
+        
+        let tooBar: UIToolbar = UIToolbar()
+//        tooBar.barStyle = UIBarStyle.blackTranslucent
+        tooBar.items=[
+            UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: self, action: nil),
+            UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.done, target: self, action: Selector(("donePressed")))]
+        tooBar.sizeToFit()
+        textField.inputAccessoryView = tooBar
+    }
+    @objc
+    func donePressed () {
+        textField.resignFirstResponder()
+        print("DONE PRESSED CALLED");
     }
     func calcAndUpdate(){
         let nps = picker.selectedRow(inComponent: 0) == 0 ?  NPS2(number: currentNum) : NPS3(number: currentNum);
